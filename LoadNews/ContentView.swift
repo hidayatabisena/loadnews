@@ -60,6 +60,13 @@ extension Binding where Value: Equatable {
 }
 
 
-#Preview {
-    ContentView()
+//#Preview {
+//    ContentView()
+//}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+        
+    }
 }
