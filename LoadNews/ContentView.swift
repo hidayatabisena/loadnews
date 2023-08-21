@@ -14,9 +14,9 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Picker("News Source", selection: $selectedSource.onChange { newTag in
+            Picker("News Source", selection: $selectedSource.onChange { newSource in
                 Task {
-                    await articleVM.loadNews(from: newTag.url)
+                    await articleVM.loadNews(from: newSource)
                 }
             }) {
                 ForEach(NewsSource.allCases, id: \.self) { source in
@@ -27,14 +27,14 @@ struct ContentView: View {
 
             .pickerStyle(SegmentedPickerStyle())
             .task {
-                await articleVM.loadNews(from: selectedSource.url)
+                await articleVM.loadNews(from: selectedSource)
             }
             
             List(articleVM.articles) { article in
                 Text(article.title)
             }
             .task {
-                await articleVM.loadNews(from: selectedSource.url)
+                await articleVM.loadNews(from: selectedSource)
             }
         }
         .padding()
